@@ -1,0 +1,8 @@
+Ajeet Kumar
+1.State Management:- For the state management i have used Redux Toolkit. 
+2. RTK Query- RTK Mutation:- for the API calling i have used RTK Query- RTK Mutation which was new for me but as per Farrukh suggestion i have used it
+	Two of the most useful utilities provided by Redux Toolkit are RTK Query and RTK Mutation. RTK Query is a data fetching and caching library that helps simplify the process of querying APIs. RTK Mutation is a library that simplifies the process of making updates to the server using a Redux-style API.
+3.UI Design:-I can make UI more smooth  currently  i don't have efficiant time but i'll do it in my extra time.
+4. -Optional:- I can use Redux persist for state management on local
+
+
