@@ -32,7 +32,7 @@ const Login: React.FC = () => {
     const [loginUser, { error, isLoading }] = useLoginUserMutation();
 
 
-    const nevigate = useNavigate();
+    // const nevigate = useNavigate();
 
 
     //form handler it is handling login form data
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
             then((res) => {
                 localStorage.setItem("access_token", res.access_token);
                 // localStorage.setItem("component", "Home");
-                nevigate("/home")
+                //nevigate("/home")
 
             })
             .catch((error) => {
@@ -69,6 +69,10 @@ const Login: React.FC = () => {
                 </Grid>
 
                 <form onSubmit={handleUserLogin}>
+                    <div>
+                        <label htmlFor="name">Email</label>
+                        <input type='text' id='name' />
+                    </div>
                     <TextField label='Email' style={btnStyle} placeholder='Enter Email' onChange={(e) => setemail(e.target.value)} fullWidth required />
 
                     <TextField label='password' placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required autoComplete='on' />

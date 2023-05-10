@@ -7,6 +7,7 @@ import NewsSearch from '../components/NewsSearch/NewsSearch'
 import ProtectionRoute from './ProtectionRoute'
 import NewsDetails from '../components/NewsDetails/NewsDetails'
 import PageNotFound from '../components/PageNotFound/PageNotFound'
+import { ErrorBoundary } from '../components/ErrorBoundry/ErrorBoundary '
 
 
 const AppRouter = () => {
@@ -30,7 +31,11 @@ const AppRouter = () => {
         path='/search'
         element={
           <ProtectionRoute auth={auth}> <NewsSearch /></ProtectionRoute>} />
-      <Route path='/' element={<Login />} />
+      <Route path='/' element={
+      <ErrorBoundary>
+      <Login />
+      </ErrorBoundary>
+      } />
       <Route path="*" element={<PageNotFound />} />
 
     </Routes>

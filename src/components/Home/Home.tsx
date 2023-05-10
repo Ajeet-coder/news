@@ -19,7 +19,7 @@ const Home :React.FC= () => {
    // const searchedNews = useSelector((state: any) => state.searchedvalue.value)
 
    //here checking if api is in pending state
-    if (NewYorkNews.isLoading) return <div>Loading....</div>
+    if (!NewYorkNews.data || NewYorkNews.isLoading) return <div>Loading....</div>
     
 
 
