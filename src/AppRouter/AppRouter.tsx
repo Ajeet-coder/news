@@ -19,22 +19,22 @@ const AppRouter = () => {
       <Route
         path='/home'
         element={
-          <ProtectionRoute auth={auth}><Home /></ProtectionRoute>
+          <ProtectionRoute><Home /></ProtectionRoute>
         } />
       <Route
         path='/details/:index'
         element={
-          <ProtectionRoute auth={auth}><NewsDetails /></ProtectionRoute>
+          <ProtectionRoute><NewsDetails /></ProtectionRoute>
         } />
 
       <Route
         path='/search'
         element={
-          <ProtectionRoute auth={auth}> <NewsSearch /></ProtectionRoute>} />
+          <ProtectionRoute > <NewsSearch /></ProtectionRoute>} />
       <Route path='/' element={
-      <ErrorBoundary>
+      // <ErrorBoundary>
       <Login />
-      </ErrorBoundary>
+      // </ErrorBoundary>
       } />
       <Route path="*" element={<PageNotFound />} />
 

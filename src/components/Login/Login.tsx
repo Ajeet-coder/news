@@ -1,98 +1,136 @@
-import React, { useState } from 'react'
-import { Grid, Paper, Avatar, TextField, Button, Typography } from "@mui/material"
-import Checkbox from '@mui/material/Checkbox';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import {
+  Grid,
+  Paper,
+  Avatar,
+  TextField,
+  Button,
+  Typography,
+  FormControl,
+} from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useLoginUserMutation } from '../../redux/slice/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
-import './Login.css'
-import _ from 'lodash';
+import { login, useLoginUserMutation } from "../../redux/slice/userSlice";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
+import _ from "lodash";
+import { btnStyle, paperStyle } from "./LoginStyle";
+import { textFeildObject } from "../../Input/TextInputObjects";
+import CustomTextFeild from "../../Input/CustomTextFeild/CustomTextFeild";
 
-
-
-
-
-
-
+interface ApiResponse {
+  data: {
+    starus: number;
+    access_token: string;
+    
+  };
+}
 const Login: React.FC = () => {
+ 
 
-    //Styling for paper and 
-    const paperStyle: any = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
-    const btnStyle: any = { margin: '8px 0' }
+  //states for login credentials
+  const [password, setPassword] = useState("");
+  const [email, setemail] = useState("");
 
+  //Hookks provided by the rtk query for Login
+  const [loginUser, { error }] = useLoginUserMutation();
 
-    //states for login credentials
-    const [password, setPassword] = useState("");
-    const [email, setemail] = useState("");
+  const nevigate = useNavigate();
 
-    //Hookks provided by the rtk query for Login
-    const [loginUser, { error, isLoading }] = useLoginUserMutation();
+  //form handler it is handling login form data
+  const handleUserLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("step 1")
+    let formdata = {
+      email,
+      password,
+    };
 
-
-    // const nevigate = useNavigate();
-
-
-    //form handler it is handling login form data
-    const handleUserLogin = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        let formdata = {
-            email,
-            password
-        }
-        //calling Ligin API for user login
-        loginUser(formdata).unwrap().
-            then((res) => {
-                localStorage.setItem("access_token", res.access_token);
-                // localStorage.setItem("component", "Home");
-                //nevigate("/home")
-
-            })
-            .catch((error) => {
-                <ToastContainer />
-
-                console.log("errror    =>>> " + JSON.stringify(error, null, 2))
-            })
-
+    try {
+      const res = await loginUser(formdata);
+      if (!error) {
+        const response = res as ApiResponse;
+        const access_token = response?.data?.access_token;
+        sessionStorage.setItem("access_token", access_token);
+       
+        nevigate("/home");
+      } else {
+        nevigate("/");
+      }
+    } catch (error) {
+      nevigate("/");
     }
 
+    
+  };
 
-
-    return (
+  return (
+    <Grid>
+      <Paper elevation={10} style={paperStyle}>
         <Grid>
-            <Paper elevation={10} style={paperStyle} >
-                <Grid  >
-                    <Avatar className='avatar' ><LockOutlinedIcon /></Avatar>
-                    <h2>Sign in</h2>
-                </Grid>
-
-                <form onSubmit={handleUserLogin}>
-                    <div>
-                        <label htmlFor="name">Email</label>
-                        <input type='text' id='name' />
-                    </div>
-                    <TextField label='Email' style={btnStyle} placeholder='Enter Email' onChange={(e) => setemail(e.target.value)} fullWidth required />
-
-                    <TextField label='password' placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required autoComplete='on' />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
-
-                    <Button type='submit' style={btnStyle} color='primary' variant='contained' fullWidth>Sign In</Button>
-                    {error && <p>Error: Incorrect email or password</p>}
-                </form>
-                <Typography>
-
-
-                </Typography>
-                <Typography>Do you have an account ?
-
-
-                    <Link to={"register"}>Sign Up</Link>
-                </Typography>
-            </Paper>
+          <Avatar className="avatar">
+            <LockOutlinedIcon />
+          </Avatar>
+          <h2>Sign in</h2>
         </Grid>
-    )
-}
 
-export default Login
+        <FormControl component="form" onSubmit={handleUserLogin}>
+
+        {/* {textFeildObject.map((item, index) => (
+        <CustomTextFeild
+          label={item.label}
+          style={item.style}
+          placeholder={item.placeholder}
+          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setemail(e.target.value)}
+        />
+
+      ))} */}
+
+           <TextField
+            label="Email"
+            style={btnStyle}
+            placeholder="Enter Email"
+            onChange={(e) => setemail(e.target.value)}
+            fullWidth
+            required
+          /> 
+
+          <TextField
+            label="password"
+            placeholder="Enter password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+            required
+            autoComplete="on"
+          />
+          <FormControlLabel
+            control={<Checkbox defaultChecked />}
+            label="Remember me"
+          />
+
+          <Button
+            type="submit"
+            title="Sign In"
+            style={btnStyle}
+            color="primary"
+            variant="contained"
+            fullWidth
+          >
+            Sign In
+          </Button>
+          {error && <p>Error: Incorrect email or password</p>}
+        </FormControl>
+        <Typography></Typography>
+        <Typography>
+          Do you have an account ?<Link to={"register"}>Sign Up</Link>
+        </Typography>
+      </Paper>
+    </Grid>
+  );
+};
+
+export default Login;

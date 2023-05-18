@@ -4,12 +4,13 @@ import Home from '../components/Home/Home'
 import NewsSearch from '../components/NewsSearch/NewsSearch'
 
 interface IprotectedRouteProps {
-  auth: any
+ 
   children: React.ReactNode
 }
 
-const ProtectionRoute = ({ auth, children }: IprotectedRouteProps) => {
-  return <> {auth ? children : <Navigate replace to={'/'} />}</>
+const ProtectionRoute = ({  children }: IprotectedRouteProps) => {
+  console.log("Auth  ",sessionStorage.getItem("access_token"))
+  return <> {sessionStorage.getItem("access_token") ? children : <Navigate replace to={'/'} />}</>
 
 
 }

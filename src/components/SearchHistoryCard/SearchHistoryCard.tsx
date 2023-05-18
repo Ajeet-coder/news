@@ -1,21 +1,20 @@
-import React from 'react'
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+import React from "react";
+import {
+  
+  CardHeader,
+ 
+} from "@mui/material";
 
-
-interface ISearchHistoryCardProps{
-    search:string
+interface ISearchHistoryCardProps {
+  search: string;
 }
-function SearchHistoryCard(props:ISearchHistoryCardProps) {
+function SearchHistoryCard(props: ISearchHistoryCardProps) {
   return (
-    // <Card sx={{ maxWidth: 100, mt: 1 }} className='card-container'  >
-                <CardHeader
-                    
-                     title={props.search}
-                    // subheader={updated_date}
-                />
-                
-            // </Card>
-  )
+    <CardHeader
+      title={props.search}
+      // subheader={updated_date}
+    />
+  );
 }
 
-export default SearchHistoryCard
+export default SearchHistoryCard;
