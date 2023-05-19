@@ -11,10 +11,8 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate } from "react-router-dom";
 
 const NewsCard = (props: any) => {
@@ -29,7 +27,13 @@ const NewsCard = (props: any) => {
   return (
     <>
       <Card
-        sx={{ maxWidth: 345, mt: 5, minHeight: 500, maxHeight: 500 }}
+        sx={{
+          maxWidth: 345,
+          mt: 5,
+          minHeight: 500,
+          maxHeight: 500,
+          marginTop: "100px",
+        }}
         className="card-container"
         onClick={getCardDetails}
       >

@@ -2,9 +2,9 @@ import React from 'react'
 
 function LoadingScreen() {
   return (
-    <h3>
-      Loading....
-    </h3>
+    <h6>
+      Loading.....
+    </h6>
   )
 }
 

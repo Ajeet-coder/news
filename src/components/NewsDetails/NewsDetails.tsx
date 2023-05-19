@@ -27,7 +27,7 @@ const NewsDetails: React.FC = () => {
 
   if (NewYorkNews.isLoading) return <LoadingScreen />;
   const NewsDetails = NewYorkNews.data.results[index.index];
-  
+
   if (NewsDetails.isLoading) return <LoadingScreen />;
   return (
     <Card sx={{ maxHeight: 320, mt: 8 }} className="card-container">

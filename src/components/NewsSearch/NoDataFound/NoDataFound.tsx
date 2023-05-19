@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function NoDataFound() {
-  return (
-    <div>
-      Sorry......... we couldn't data which matches your search
-    </div>
-  )
+  return <div>Sorry......... we couldn't data which matches your search</div>;
 }
 
-export default NoDataFound
+export default NoDataFound;

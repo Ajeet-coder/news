@@ -5,13 +5,12 @@ import {
   TextField,
   Button,
   Typography,
-  FormControl
+  FormControl,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import { useRegisterMutation } from "../../redux/slice/userSlice";
 import axios from "axios";
-
 
 import { Router, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -53,7 +52,6 @@ const Register: React.FC = () => {
       },
     });
 
-
   const btnStyle: any = { margin: "8px 0" };
   const [email, setemail] = useState("");
   const [error, setError] = useState("");
@@ -70,7 +68,7 @@ const Register: React.FC = () => {
           </Avatar>
           <h2>Sign Up</h2>
         </Grid>
-        <FormControl component="form"  onSubmit={handleSubmit}>
+        <FormControl component="form" onSubmit={handleSubmit}>
           <TextField
             label=" Email"
             name="email"

@@ -25,12 +25,9 @@ interface ApiResponse {
   data: {
     starus: number;
     access_token: string;
-    
   };
 }
 const Login: React.FC = () => {
- 
-
   //states for login credentials
   const [password, setPassword] = useState("");
   const [email, setemail] = useState("");
@@ -43,7 +40,7 @@ const Login: React.FC = () => {
   //form handler it is handling login form data
   const handleUserLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("step 1")
+    console.log("step 1");
     let formdata = {
       email,
       password,
@@ -55,7 +52,7 @@ const Login: React.FC = () => {
         const response = res as ApiResponse;
         const access_token = response?.data?.access_token;
         sessionStorage.setItem("access_token", access_token);
-       
+
         nevigate("/home");
       } else {
         nevigate("/");
@@ -63,8 +60,6 @@ const Login: React.FC = () => {
     } catch (error) {
       nevigate("/");
     }
-
-    
   };
 
   return (
@@ -78,25 +73,14 @@ const Login: React.FC = () => {
         </Grid>
 
         <FormControl component="form" onSubmit={handleUserLogin}>
-
-        {/* {textFeildObject.map((item, index) => (
-        <CustomTextFeild
-          label={item.label}
-          style={item.style}
-          placeholder={item.placeholder}
-          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setemail(e.target.value)}
-        />
-
-      ))} */}
-
-           <TextField
+          <TextField
             label="Email"
             style={btnStyle}
             placeholder="Enter Email"
             onChange={(e) => setemail(e.target.value)}
             fullWidth
             required
-          /> 
+          />
 
           <TextField
             label="password"

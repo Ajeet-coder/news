@@ -1,4 +1,12 @@
-import { Select, MenuItem, InputLabel, Grid, TextField, FormControl, styled } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  InputLabel,
+  Grid,
+  TextField,
+  FormControl,
+  styled,
+} from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,84 +22,58 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logout from "../Logout/Logout";
-import { useMediaQuery,useTheme } from '@mui/material';
-
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //updating news type based on users selection
   const updatenewsType = (e: any) => {
     dispatch(updateNewsType(e.target.value));
   };
 
   const navigateSearchPage = () => {
-    //localStorage.setItem("component", "NewsSearch")
     navigate("/search");
   };
 
-
-
-  // return (
-  //   <Box sx={{ flexGrow: 1 }}>
-  //     <AppBar>
-  //       <Toolbar>
-  //         <img
-  //           src="https://img.favpng.com/5/10/18/new-york-city-the-new-york-times-newspaper-logo-symbol-png-favpng-V4BQsYhVgcXNux5sL0nnMdaM0.jpg"
-  //           alt="newYork Times"
-  //         />
-  //         <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-  //           <Select onChange={updatenewsType}>
-  //             <MenuItem value="world">World</MenuItem>
-  //             <MenuItem value="science">Science</MenuItem>
-  //             <MenuItem value="arts">Art</MenuItem>
-  //           </Select>
-  //         </Typography>
-  //         <Logout/>
-  //       </Toolbar>
-  //     </AppBar>
-  //   </Box>
-  // );
-
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <AppBar className="body">
       <Toolbar>
-
-      {!isSmallScreen && (
-          <Box sx={{ display: 'flex', alignItems: 'center', mr: 1 }}>
-          <img
-            src="https://img.favpng.com/5/10/18/new-york-city-the-new-york-times-newspaper-logo-symbol-png-favpng-V4BQsYhVgcXNux5sL0nnMdaM0.jpg"
-            alt="NewYork Times"
-            className="img"
-          />
-        </Box>
-        )}
-        
-
-        {/* <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="h6" color="inherit" noWrap>
-            News App
-          </Typography>
-        </Box> */}
-
         {!isSmallScreen && (
-          <Box sx={{ flexGrow: 1, mr: 2 }} >
-            <TextField
-              type="search"
-              
-              onClick={navigateSearchPage}
-              placeholder="Search news and articles..."
-              
+          <Box sx={{ display: "flex", alignItems: "center", mr: 1 }}>
+            <img
+              src="https://img.favpng.com/5/10/18/new-york-city-the-new-york-times-newspaper-logo-symbol-png-favpng-V4BQsYhVgcXNux5sL0nnMdaM0.jpg"
+              alt="NewYork Times"
+              className="img"
             />
           </Box>
         )}
 
+        {!isSmallScreen && (
+          <>
+            <Box sx={{ flexGrow: 1, mr: 2 }}>
+              <TextField
+                type="search"
+                onClick={navigateSearchPage}
+                placeholder="Search news and articles..."
+              />
+            </Box>
+
+            <Box sx={{ flexGrow: 1, mr: 2 }}>
+              <Link to="https://www.nytimes.com/international/">
+                The NewYork TiMes
+              </Link>
+            </Box>
+          </>
+        )}
+
         <FormControl sx={{ minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-label">Select News</InputLabel>
-          <Select  onChange={updatenewsType}>
+          <InputLabel id="demo-simple-select-label" className="selecttext">
+            Select News
+          </InputLabel>
+          <Select onChange={updatenewsType}>
             <MenuItem value="world">World</MenuItem>
             <MenuItem value="science">Science</MenuItem>
             <MenuItem value="arts">Art</MenuItem>
@@ -108,49 +90,12 @@ const Header: React.FC = () => {
             />
           </Box>
         )}
-
-        <Logout />
+        <Box sx={{ mr: 2, marginLeft: 1 }}>
+          <Logout />
+        </Box>
       </Toolbar>
     </AppBar>
   );
-
-  // return (
-  //   <div className="header">
-  //     <div className=" slect">
-  //       <InputLabel id="demo-simple-select-label" >Select News  categary</InputLabel>
-
-  //       <Select
-  //         labelId="demo-simple-select-label"
-  //         id="demo-simple-select"
-
-  //         label="Age"
-  //         onChange={updatenewsType}
-
-  //       >
-  //         <MenuItem value="world">World</MenuItem>
-  //         <MenuItem value="science">Science</MenuItem>
-  //         <MenuItem value="arts">Art</MenuItem>
-  //       </Select>
-  //     </div>
-  //     <div className="brand-name">
-  //       <Link to="https://www.nytimes.com/international/">The NewYork TiMes</Link>
-  //     </div>
-  //     <div className="search-bar">
-  //       <input
-  //         type="search"
-  //         onClick={navigateSearchPage}
-  //         placeholder="Search news and artical..."
-
-  //       />
-  //       <button type="submit" >
-  //         <i className="fa fa-search"></i>
-  //       </button>
-  //     </div>
-  //     <div className="user-img">
-  //       <img src="https://img.favpng.com/5/10/18/new-york-city-the-new-york-times-newspaper-logo-symbol-png-favpng-V4BQsYhVgcXNux5sL0nnMdaM0.jpg" alt="user" />
-  //     </div>
-  //   </div>
-  // );
 };
 
 export default Header;

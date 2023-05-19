@@ -12,13 +12,8 @@ function Logout() {
   };
 
   return (
-    <Box sx={{ display: "flex",justifyContent: 'center',  mt: 0.5 }}>
-      <Button
-        
-        variant="contained"
-        size="small"
-        onClick={handleLogout}
-      >
+    <Box sx={{ display: "flex", justifyContent: "center", mt: 0.5 }}>
+      <Button variant="contained" size="small" onClick={handleLogout}>
         LogOut?
       </Button>
     </Box>
